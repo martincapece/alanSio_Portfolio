@@ -55,13 +55,13 @@ export default function Services() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, index) => (
               <div
                 key={index}
-                className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
+                className="bg-white p-8 rounded-xl shadow-lg lg:hover:shadow-xl lg:transition-all lg:duration-300 lg:transform lg:hover:-translate-y-2 text-center md:text-left"
               >
-                <div className="text-blue-600 mb-6">{service.icon}</div>
+                <div className="text-blue-600 mb-6 flex justify-center md:justify-start">{service.icon}</div>
                 <h3 className="text-xl font-bold text-gray-800 mb-4">{service.title}</h3>
                 <p className="text-gray-600 leading-relaxed">{service.description}</p>
               </div>
@@ -71,7 +71,7 @@ export default function Services() {
           <div className="text-center mt-16">
             <button
               onClick={() => document.getElementById("contacto")?.scrollIntoView({ behavior: "smooth" })}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all transform hover:scale-105"
+              className="bg-blue-600 lg:hover:bg-blue-700 text-white px-8 py-4 rounded-lg text-lg font-semibold lg:transition-all lg:transform lg:hover:scale-105"
             >
               Solicitar Cotización
             </button>

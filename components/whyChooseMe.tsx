@@ -63,9 +63,9 @@ export default function WhyChooseMe() {
           </div>
 
           {/* Estadísticas */}
-          <div className="grid grid-cols-2 md:grid-cols-2 gap-6 mb-16">
+          <div className="grid grid-cols-2 gap-6 mb-16 max-w-md mx-auto md:max-w-none md:grid-cols-2">
             {stats.map((stat, index) => (
-              <div key={index} className="text-center bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
+              <div key={index} className="text-center bg-white rounded-xl p-6 shadow-lg lg:hover:shadow-xl lg:transition-shadow">
                 <div className="text-3xl md:text-4xl font-bold text-blue-600 mb-2">{stat.number}</div>
                 <div className="text-gray-600 font-medium">{stat.label}</div>
               </div>
@@ -73,14 +73,14 @@ export default function WhyChooseMe() {
           </div>
 
           {/* Razones principales */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
             {reasons.map((reason, index) => (
               <div 
                 key={index} 
-                className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 group"
+                className="bg-white p-8 rounded-2xl shadow-lg lg:hover:shadow-xl lg:transition-all lg:duration-300 lg:transform lg:hover:-translate-y-2 group text-center md:text-left"
               >
-                <div className="flex items-center mb-6">
-                  <div className="w-14 h-14 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform">
+                <div className="flex items-center mb-6 justify-center md:justify-start">
+                  <div className="w-14 h-14 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center mr-4 lg:group-hover:scale-110 lg:transition-transform">
                     <reason.icon className="w-7 h-7 text-white" />
                   </div>
                   <div className="flex-1">
@@ -96,26 +96,26 @@ export default function WhyChooseMe() {
           </div>
 
           {/* Call to Action */}
-          <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 rounded-2xl p-12 text-white text-center relative overflow-hidden">
+          <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 rounded-2xl p-8 md:p-12 text-white text-center relative overflow-hidden">
             <div className="absolute inset-0 bg-black/10"></div>
             <div className="relative z-10">
-              <h3 className="text-3xl md:text-4xl font-bold mb-6">
+              <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 md:mb-6">
                 ¿Listo Para Dar Vida a Tu Visión?
               </h3>
-              <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
+              <p className="text-lg md:text-xl mb-6 md:mb-8 opacity-90 max-w-2xl mx-auto">
                 Cada proyecto es una oportunidad de crear algo extraordinario. 
                 Trabajemos juntos para convertir tus ideas en realidades visuales impactantes.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <button
                   onClick={() => document.getElementById("contacto")?.scrollIntoView({ behavior: "smooth" })}
-                  className="bg-white text-blue-600 px-8 py-4 rounded-xl text-lg font-semibold hover:bg-gray-100 transition-all transform hover:scale-105 shadow-lg"
+                  className="bg-white text-blue-600 px-6 md:px-8 py-3 md:py-4 rounded-xl text-base md:text-lg font-semibold lg:hover:bg-gray-100 lg:transition-all lg:transform lg:hover:scale-105 shadow-lg"
                 >
                   Iniciar Proyecto
                 </button>
                 <button
                   onClick={() => document.getElementById("portfolio")?.scrollIntoView({ behavior: "smooth" })}
-                  className="border-2 border-white text-white px-8 py-4 rounded-xl text-lg font-semibold hover:bg-white hover:text-blue-600 transition-all transform hover:scale-105"
+                  className="border-2 border-white text-white px-6 md:px-8 py-3 md:py-4 rounded-xl text-base md:text-lg font-semibold lg:hover:bg-white lg:hover:text-blue-600 lg:transition-all lg:transform lg:hover:scale-105"
                 >
                   Ver Portfolio
                 </button>
