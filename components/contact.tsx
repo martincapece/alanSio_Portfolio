@@ -10,8 +10,6 @@ export default function Contact() {
     isSubmitting,
     isSubmitted,
     canSubmit,
-    submissionCount,
-    timeUntilNextSubmission,
     handleChange,
     handleSubmit,
   } = useContactForm()
@@ -103,37 +101,12 @@ export default function Contact() {
               <div className="bg-gray-50 p-8 rounded-xl">
                 <h3 className="text-2xl font-bold text-gray-800 mb-6">Envíame un Mensaje</h3>
 
-                {/* Rate Limit Info */}
-                {submissionCount > 0 && (
-                  <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                    <div className="flex items-center text-blue-700">
-                      <Clock className="w-4 h-4 mr-2" />
-                      <span className="text-sm">
-                        Has enviado {submissionCount} mensaje{submissionCount !== 1 ? 's' : ''} hoy
-                        {submissionCount >= 2 && " (máximo 3 por día)"}
-                      </span>
-                    </div>
-                  </div>
-                )}
-
                 {/* Error general o rate limit */}
                 {errors.general && (
                   <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
                     <div className="flex items-center text-red-700">
                       <AlertTriangle className="w-4 h-4 mr-2 flex-shrink-0" />
                       <span className="text-sm">{errors.general}</span>
-                    </div>
-                  </div>
-                )}
-
-                {/* Tiempo hasta próximo envío */}
-                {!canSubmit && timeUntilNextSubmission > 0 && (
-                  <div className="mb-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
-                    <div className="flex items-center text-yellow-700">
-                      <Clock className="w-4 h-4 mr-2" />
-                      <span className="text-sm">
-                        Próximo envío disponible en: {formatTime(timeUntilNextSubmission)}
-                      </span>
                     </div>
                   </div>
                 )}
