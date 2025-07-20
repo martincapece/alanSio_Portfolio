@@ -13,9 +13,9 @@ export default function About() {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <img
-                src="/placeholder.svg?height=500&width=500"
-                alt="Alan Sio - Artista 3D"
-                className="rounded-lg shadow-2xl w-full"
+              src="/profiles/pf_AlanSio.jpg"
+              alt="Alan Sio - Artista 3D"
+              className="rounded-lg shadow-2xl"
               />
             </div>
 

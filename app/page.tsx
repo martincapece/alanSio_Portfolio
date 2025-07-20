@@ -3,7 +3,7 @@ import Hero from "@/components/hero"
 import About from "@/components/about"
 import Services from "@/components/services"
 import Portfolio from "@/components/portfolio"
-import Testimonials from "@/components/testimonials"
+import WhyChooseMe from "@/components/whyChooseMe"
 import Contact from "@/components/contact"
 import Footer from "@/components/footer"
 
@@ -15,7 +15,7 @@ export default function Home() {
       <About />
       <Services />
       <Portfolio />
-      <Testimonials />
+      <WhyChooseMe />
       <Contact />
       <Footer />
     </main>

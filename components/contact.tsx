@@ -1,49 +1,32 @@
 "use client"
 
-import type React from "react"
-
-import { useState } from "react"
-import { Mail, Phone, MapPin, MessageCircle, Send, CheckCircle } from "lucide-react"
+import { Mail, Phone, MapPin, MessageCircle, Send, CheckCircle, AlertTriangle, Clock } from "lucide-react"
+import { useContactForm } from "../hooks/useContactForm"
 
 export default function Contact() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    service: "",
-    message: "",
-  })
-  const [isSubmitted, setIsSubmitted] = useState(false)
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    // Aquí implementarías la lógica de envío del formulario
-    console.log("Form submitted:", formData)
-    setIsSubmitted(true)
-
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setIsSubmitted(false)
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        service: "",
-        message: "",
-      })
-    }, 3000)
-  }
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    })
-  }
+  const {
+    formData,
+    errors,
+    isSubmitting,
+    isSubmitted,
+    canSubmit,
+    submissionCount,
+    timeUntilNextSubmission,
+    handleChange,
+    handleSubmit,
+  } = useContactForm()
 
   const whatsappMessage = encodeURIComponent(
     "¡Hola Alan! Me interesa conocer más sobre tus servicios de arte 3D y animación digital. ¿Podríamos conversar sobre mi proyecto?",
   )
+
+  const formatTime = (ms: number) => {
+    const minutes = Math.ceil(ms / (60 * 1000))
+    const hours = Math.ceil(ms / (60 * 60 * 1000))
+    
+    if (minutes < 60) return `${minutes} minuto${minutes !== 1 ? 's' : ''}`
+    return `${hours} hora${hours !== 1 ? 's' : ''}`
+  }
 
   return (
     <section id="contacto" className="py-20 bg-white">
@@ -67,7 +50,7 @@ export default function Contact() {
                   <Mail className="w-6 h-6 text-blue-600 mr-4" />
                   <div>
                     <h4 className="font-semibold text-gray-800">Email</h4>
-                    <p className="text-gray-600">alan.sio@email.com</p>
+                    <p className="text-gray-600">alan.sio.lopez@gmail.com</p>
                   </div>
                 </div>
 
@@ -75,7 +58,7 @@ export default function Contact() {
                   <Phone className="w-6 h-6 text-blue-600 mr-4" />
                   <div>
                     <h4 className="font-semibold text-gray-800">Teléfono</h4>
-                    <p className="text-gray-600">+54 11 1234-5678</p>
+                    <p className="text-gray-600">+54 11 6903-1345</p>
                   </div>
                 </div>
 
@@ -90,7 +73,7 @@ export default function Contact() {
 
               {/* Botón de WhatsApp */}
               <a
-                href={`https://wa.me/5491123456789?text=${whatsappMessage}`}
+                href={`https://wa.me/5491169031345?text=${whatsappMessage}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-semibold transition-all transform hover:scale-105 mb-8"
@@ -120,6 +103,41 @@ export default function Contact() {
               <div className="bg-gray-50 p-8 rounded-xl">
                 <h3 className="text-2xl font-bold text-gray-800 mb-6">Envíame un Mensaje</h3>
 
+                {/* Rate Limit Info */}
+                {submissionCount > 0 && (
+                  <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                    <div className="flex items-center text-blue-700">
+                      <Clock className="w-4 h-4 mr-2" />
+                      <span className="text-sm">
+                        Has enviado {submissionCount} mensaje{submissionCount !== 1 ? 's' : ''} hoy
+                        {submissionCount >= 2 && " (máximo 3 por día)"}
+                      </span>
+                    </div>
+                  </div>
+                )}
+
+                {/* Error general o rate limit */}
+                {errors.general && (
+                  <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+                    <div className="flex items-center text-red-700">
+                      <AlertTriangle className="w-4 h-4 mr-2 flex-shrink-0" />
+                      <span className="text-sm">{errors.general}</span>
+                    </div>
+                  </div>
+                )}
+
+                {/* Tiempo hasta próximo envío */}
+                {!canSubmit && timeUntilNextSubmission > 0 && (
+                  <div className="mb-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                    <div className="flex items-center text-yellow-700">
+                      <Clock className="w-4 h-4 mr-2" />
+                      <span className="text-sm">
+                        Próximo envío disponible en: {formatTime(timeUntilNextSubmission)}
+                      </span>
+                    </div>
+                  </div>
+                )}
+
                 {isSubmitted ? (
                   <div className="text-center py-8">
                     <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
@@ -127,7 +145,7 @@ export default function Contact() {
                     <p className="text-gray-600">Gracias por contactarme. Te responderé pronto.</p>
                   </div>
                 ) : (
-                  <form onSubmit={handleSubmit} className="space-y-6">
+                  <form action="https://formspree.io/f/mdkdaazg" method="POST" onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid md:grid-cols-2 gap-4">
                       <div>
                         <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-2">
@@ -140,9 +158,12 @@ export default function Contact() {
                           value={formData.name}
                           onChange={handleChange}
                           required
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+                          className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent ${
+                            errors.name ? 'border-red-500 bg-red-50' : 'border-gray-300'
+                          }`}
                           placeholder="Tu nombre"
                         />
+                        {errors.name && <p className="mt-1 text-sm text-red-600">{errors.name}</p>}
                       </div>
 
                       <div>
@@ -156,9 +177,12 @@ export default function Contact() {
                           value={formData.email}
                           onChange={handleChange}
                           required
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+                          className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent ${
+                            errors.email ? 'border-red-500 bg-red-50' : 'border-gray-300'
+                          }`}
                           placeholder="tu@email.com"
                         />
+                        {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email}</p>}
                       </div>
                     </div>
 
@@ -173,9 +197,12 @@ export default function Contact() {
                           name="phone"
                           value={formData.phone}
                           onChange={handleChange}
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+                          className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent ${
+                            errors.phone ? 'border-red-500 bg-red-50' : 'border-gray-300'
+                          }`}
                           placeholder="+54 11 1234-5678"
                         />
+                        {errors.phone && <p className="mt-1 text-sm text-red-600">{errors.phone}</p>}
                       </div>
 
                       <div>
@@ -202,7 +229,7 @@ export default function Contact() {
 
                     <div>
                       <label htmlFor="message" className="block text-sm font-semibold text-gray-700 mb-2">
-                        Mensaje *
+                        Mensaje * <span className="text-gray-400 font-normal">({formData.message.length}/2500)</span>
                       </label>
                       <textarea
                         id="message"
@@ -211,17 +238,38 @@ export default function Contact() {
                         onChange={handleChange}
                         required
                         rows={5}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent resize-none"
+                        className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent resize-none ${
+                          errors.message ? 'border-red-500 bg-red-50' : 'border-gray-300'
+                        }`}
                         placeholder="Cuéntame sobre tu proyecto..."
+                        maxLength={1000}
                       ></textarea>
+                      {errors.message && <p className="mt-1 text-sm text-red-600">{errors.message}</p>}
                     </div>
+
+                    <input type="hidden" name="_captcha" value="false" />
+                    <input type="hidden" name="_subject" value="Nuevo mensaje desde el portfolio" />
 
                     <button
                       type="submit"
-                      className="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-4 rounded-lg font-semibold transition-all transform hover:scale-105 flex items-center justify-center"
+                      disabled={!canSubmit || isSubmitting}
+                      className={`w-full px-6 py-4 rounded-lg font-semibold transition-all transform flex items-center justify-center ${
+                        canSubmit && !isSubmitting
+                          ? 'bg-blue-600 hover:bg-blue-700 text-white hover:scale-105'
+                          : 'bg-gray-400 text-gray-600 cursor-not-allowed'
+                      }`}
                     >
-                      <Send className="w-5 h-5 mr-2" />
-                      Enviar Mensaje
+                      {isSubmitting ? (
+                        <>
+                          <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
+                          Enviando...
+                        </>
+                      ) : (
+                        <>
+                          <Send className="w-5 h-5 mr-2" />
+                          {canSubmit ? 'Enviar Mensaje' : 'Envío Limitado'}
+                        </>
+                      )}
                     </button>
                   </form>
                 )}
