@@ -144,7 +144,7 @@ export default function Portfolio() {
                     {/* Botón de play personalizado - solo cuando está pausado */}
                     {!isPlaying && (
                       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                        <div className="bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-full transition-all transform hover:scale-110 pointer-events-auto cursor-pointer"
+                        <div className="bg-blue-600 lg:hover:bg-blue-700 text-white p-4 rounded-full lg:transition-all lg:transform lg:hover:scale-110 pointer-events-auto cursor-pointer"
                              onClick={handlePlayVideo}
                              title="Reproducir video (con audio)">
                           <Play size={32} />
@@ -163,13 +163,13 @@ export default function Portfolio() {
               {/* Controles del carousel de proyectos */}
               <button
                 onClick={prevSlide}
-                className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-all"
+                className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/50 lg:hover:bg-black/70 text-white p-2 rounded-full lg:transition-all"
               >
                 <ChevronLeft size={24} />
               </button>
               <button
                 onClick={nextSlide}
-                className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-all"
+                className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/50 lg:hover:bg-black/70 text-white p-2 rounded-full lg:transition-all"
               >
                 <ChevronRight size={24} />
               </button>
@@ -179,13 +179,13 @@ export default function Portfolio() {
                 <>
                   <button
                     onClick={prevMedia}
-                    className="absolute left-4 bottom-4 bg-blue-600/80 hover:bg-blue-700 text-white p-1 rounded-full transition-all"
+                    className="absolute left-4 bottom-4 bg-blue-600/80 lg:hover:bg-blue-700 text-white p-1 rounded-full lg:transition-all"
                   >
                     <ChevronLeft size={16} />
                   </button>
                   <button
                     onClick={nextMedia}
-                    className="absolute right-4 bottom-4 bg-blue-600/80 hover:bg-blue-700 text-white p-1 rounded-full transition-all"
+                    className="absolute right-4 bottom-4 bg-blue-600/80 lg:hover:bg-blue-700 text-white p-1 rounded-full lg:transition-all"
                   >
                     <ChevronRight size={16} />
                   </button>
@@ -199,7 +199,7 @@ export default function Portfolio() {
                           setCurrentMediaIndex(mediaIndex)
                           setIsPlaying(false)
                         }}
-                        className={`w-2 h-2 rounded-full transition-all ${
+                        className={`w-2 h-2 rounded-full lg:transition-all ${
                           mediaIndex === currentMediaIndex ? "bg-blue-600" : "bg-white/50"
                         }`}
                       />
@@ -229,10 +229,10 @@ export default function Portfolio() {
                   setCurrentMediaIndex(0) // Reset to first media when changing project
                   setIsPlaying(false) // Pausar cualquier video al cambiar thumbnail
                 }}
-                className={`relative aspect-square rounded-lg overflow-hidden transition-all ${
+                className={`relative aspect-square rounded-lg overflow-hidden lg:transition-all ${
                   index === currentIndex
-                    ? "ring-4 ring-blue-600 transform scale-105"
-                    : "hover:transform hover:scale-105"
+                    ? "ring-4 ring-blue-600 lg:transform lg:scale-105"
+                    : "lg:hover:transform lg:hover:scale-105"
                 }`}
               >
                 {item.media[0].type === "video" ? (
@@ -266,7 +266,7 @@ export default function Portfolio() {
             <p className="text-gray-600 mb-6">¿Te interesa ver más de mi trabajo o discutir tu próximo proyecto?</p>
             <button
               onClick={() => document.getElementById("contacto")?.scrollIntoView({ behavior: "smooth" })}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all transform hover:scale-105"
+              className="bg-blue-600 lg:hover:bg-blue-700 text-white px-8 py-4 rounded-lg text-lg font-semibold lg:transition-all lg:transform lg:hover:scale-105"
             >
               Hablemos de tu Proyecto
             </button>

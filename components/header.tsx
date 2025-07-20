@@ -24,31 +24,31 @@ export default function Header() {
           <nav className="hidden md:flex space-x-8">
             <button
               onClick={() => scrollToSection("inicio")}
-              className="text-gray-600 hover:text-blue-600 transition-colors"
+              className="text-gray-600 lg:hover:text-blue-600 lg:transition-colors"
             >
               Inicio
             </button>
             <button
               onClick={() => scrollToSection("sobre-mi")}
-              className="text-gray-600 hover:text-blue-600 transition-colors"
+              className="text-gray-600 lg:hover:text-blue-600 lg:transition-colors"
             >
               Sobre Mí
             </button>
             <button
               onClick={() => scrollToSection("servicios")}
-              className="text-gray-600 hover:text-blue-600 transition-colors"
+              className="text-gray-600 lg:hover:text-blue-600 lg:transition-colors"
             >
               Servicios
             </button>
             <button
               onClick={() => scrollToSection("portfolio")}
-              className="text-gray-600 hover:text-blue-600 transition-colors"
+              className="text-gray-600 lg:hover:text-blue-600 lg:transition-colors"
             >
               Portfolio
             </button>
             <button
               onClick={() => scrollToSection("contacto")}
-              className="text-gray-600 hover:text-blue-600 transition-colors"
+              className="text-gray-600 lg:hover:text-blue-600 lg:transition-colors"
             >
               Contacto
             </button>
@@ -63,34 +63,34 @@ export default function Header() {
         {/* Mobile Navigation */}
         {isMenuOpen && (
           <nav className="md:hidden py-4 border-t">
-            <div className="flex flex-col space-y-4">
+            <div className="flex flex-col space-y-4 text-center">
               <button
                 onClick={() => scrollToSection("inicio")}
-                className="text-gray-600 hover:text-blue-600 transition-colors text-left"
+                className="text-gray-600 py-2"
               >
                 Inicio
               </button>
               <button
                 onClick={() => scrollToSection("sobre-mi")}
-                className="text-gray-600 hover:text-blue-600 transition-colors text-left"
+                className="text-gray-600 py-2"
               >
                 Sobre Mí
               </button>
               <button
                 onClick={() => scrollToSection("servicios")}
-                className="text-gray-600 hover:text-blue-600 transition-colors text-left"
+                className="text-gray-600 py-2"
               >
                 Servicios
               </button>
               <button
                 onClick={() => scrollToSection("portfolio")}
-                className="text-gray-600 hover:text-blue-600 transition-colors text-left"
+                className="text-gray-600 py-2"
               >
                 Portfolio
               </button>
               <button
                 onClick={() => scrollToSection("contacto")}
-                className="text-gray-600 hover:text-blue-600 transition-colors text-left"
+                className="text-gray-600 py-2"
               >
                 Contacto
               </button>

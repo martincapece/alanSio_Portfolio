@@ -40,11 +40,11 @@ export default function Contact() {
 
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Información de Contacto */}
-            <div>
+            <div className="text-center lg:text-left">
               <h3 className="text-2xl font-bold text-gray-800 mb-8">Hablemos de tu Proyecto</h3>
 
               <div className="space-y-6 mb-8">
-                <div className="flex items-center">
+                <div className="flex items-center justify-center lg:justify-start">
                   <Mail className="w-6 h-6 text-blue-600 mr-4" />
                   <div>
                     <h4 className="font-semibold text-gray-800">Email</h4>
@@ -52,7 +52,7 @@ export default function Contact() {
                   </div>
                 </div>
 
-                <div className="flex items-center">
+                <div className="flex items-center justify-center lg:justify-start">
                   <Phone className="w-6 h-6 text-blue-600 mr-4" />
                   <div>
                     <h4 className="font-semibold text-gray-800">Teléfono</h4>
@@ -60,7 +60,7 @@ export default function Contact() {
                   </div>
                 </div>
 
-                <div className="flex items-center">
+                <div className="flex items-center justify-center lg:justify-start">
                   <MapPin className="w-6 h-6 text-blue-600 mr-4" />
                   <div>
                     <h4 className="font-semibold text-gray-800">Ubicación</h4>
@@ -70,15 +70,17 @@ export default function Contact() {
               </div>
 
               {/* Botón de WhatsApp */}
-              <a
-                href={`https://wa.me/5491169031345?text=${whatsappMessage}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-semibold transition-all transform hover:scale-105 mb-8"
-              >
-                <MessageCircle className="w-5 h-5 mr-2" />
-                Contactar por WhatsApp
-              </a>
+              <div className="flex justify-center lg:justify-start mb-8">
+                <a
+                  href={`https://wa.me/5491169031345?text=${whatsappMessage}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center bg-green-500 lg:hover:bg-green-600 text-white px-6 py-3 rounded-lg font-semibold lg:transition-all lg:transform lg:hover:scale-105"
+                >
+                  <MessageCircle className="w-5 h-5 mr-2" />
+                  Contactar por WhatsApp
+                </a>
+              </div>
 
               <div className="bg-gray-50 p-6 rounded-lg">
                 <h4 className="font-bold text-gray-800 mb-4">Horarios de Atención</h4>
@@ -226,9 +228,9 @@ export default function Contact() {
                     <button
                       type="submit"
                       disabled={!canSubmit || isSubmitting}
-                      className={`w-full px-6 py-4 rounded-lg font-semibold transition-all transform flex items-center justify-center ${
+                      className={`w-full px-6 py-4 rounded-lg font-semibold lg:transition-all lg:transform flex items-center justify-center ${
                         canSubmit && !isSubmitting
-                          ? 'bg-blue-600 hover:bg-blue-700 text-white hover:scale-105'
+                          ? 'bg-blue-600 lg:hover:bg-blue-700 text-white lg:hover:scale-105'
                           : 'bg-gray-400 text-gray-600 cursor-not-allowed'
                       }`}
                     >
